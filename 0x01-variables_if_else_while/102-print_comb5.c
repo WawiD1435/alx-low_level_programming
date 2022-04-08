@@ -7,7 +7,7 @@
 
 int main(void)
 {
-	int tens, ones, t, n;
+	int tens, ones, t, o;
 
 	for (tens = 48; tens <= 57; tens++)
 	{
