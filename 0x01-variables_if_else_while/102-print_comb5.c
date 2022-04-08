@@ -13,7 +13,7 @@ int main(void)
 	{
 		for (ones = 48; ones <= 57; ones++)
 		{
-			for (t = tens; tens <= 57; t++)
+			for (t = tens; t <= 57; t++)
 			{
 				for (o = ones + 1; o <= 57; o++)
 				{
@@ -23,7 +23,7 @@ int main(void)
 					putchar(t);
 					putchar(o);
 
-					if ((tens != 57 && ones != 56) && (t != 57 && o != 57))
+					if ((tens == 57 && ones == 56) && (t == 57 && o == 57))
 					{
 						putchar(',');
 						putchar(' ');
