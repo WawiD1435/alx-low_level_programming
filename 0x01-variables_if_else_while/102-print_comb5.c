@@ -23,7 +23,7 @@ int main(void)
 					putchar(t);
 					putchar(o);
 
-					if ((tens != 9 && ones != 8) && (t != 9 && o != 9))
+					if ((tens != 57 && ones != 56) && (t != 57 && o != 57))
 					{
 						putchar(',');
 						putchar(' ');
