@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	int sum3, sum5, total = 0, start_num, end_num = 1024;
+	int sum3 = 0, sum5 = 0, total = 0, start_num, end_num = 1024;
 
 	for (start_num = 0; start_num < end_num; start_num++)
 	{
