@@ -12,7 +12,7 @@ int main(void)
 	int i, count = 50;
 
 	printf("%lu, %lu, ", first_term, second_term);
-	for (i = 3; i < count; i++)
+	for (i = 3; i <= count; i++)
 	{
 		next_term = first_term + second_term;
 		first_term = second_term;
