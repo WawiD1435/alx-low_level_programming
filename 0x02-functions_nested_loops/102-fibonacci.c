@@ -8,8 +8,8 @@
  */
 int main(void)
 {
-	unsigned long int count = 50, first_term = 1, second_term = 2, next_term = 0;
-	int i;
+	unsigned long int first_term = 1, second_term = 2, next_term = 0;
+	int i, count = 50;
 
 	printf("%lu, %lu, ", first_term, second_term);
 	for (i = 3; i < count; i++)
