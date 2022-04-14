@@ -2,7 +2,7 @@
 
 /**
  * print_triangle - prints a  triangle
- * @size- integer for size of the triangle
+ * @size: integer for size of the triangle
  * Return: void
  */
 
@@ -16,15 +16,15 @@ void print_triangle(int size)
 		{
 			for (space = size - 1; space >= i; space--)
 			{
-				printf(" ");
+				_putchar(' ');
 			}
 			for (hash = 0; hash < i; hash++)
 			{
-				printf("#");
+				_putchar('#');
 			}
-			printf("\n");
+			_putchar('\n');
 		}
 	}
 	else
-		printf("\n");
+		_putchar('\n');
 }
