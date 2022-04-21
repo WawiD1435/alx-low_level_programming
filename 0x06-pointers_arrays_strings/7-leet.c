@@ -13,14 +13,14 @@ char *leet(char *str)
 
 	int i, j;
 
-	for (j = 0; s[j] != '\0'; j++)
+	for (j = 0; str[j] != '\0'; j++)
 	{
 		for (i = 0; alpha[i] != '\0'; i++)
 		{
-			if (s[j] == alpha[i])
-				s[j] = num[i];
+			if (str[j] == alpha[i])
+				str[j] = num[i];
 		}
 	}
 
-	return (s);
+	return (str);
 }
