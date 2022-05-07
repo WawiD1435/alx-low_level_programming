@@ -48,14 +48,7 @@ int _strlen(char *s)
  */
 void errors(void)
 {
-    char *str = "Error";
-    
-  while (*str != '\0')
-	{
-		_putchar(*str);
-		str++;
-	}
-	_putchar('\n');
+	printf("Error\n");
 	exit(98);
 }
 
