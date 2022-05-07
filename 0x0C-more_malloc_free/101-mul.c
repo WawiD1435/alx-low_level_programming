@@ -2,104 +2,134 @@
 #include "main.h"
 
 /**
- * _isdigit - checks if a string contains a non-digit char
- * @s: string to be evaluated
- *
- * Return: 0 if a non-digit is found, 1 otherwise
- */
-int _isdigit(char *s)
+  * int_calloc - calloc for ints
+  * @nmemb: n members
+  * @size: size array should be
+  * Return: int *
+  */
+int *int_calloc(int nmemb, unsigned int size)
 {
-	int i = 0;
+	int *p, n;
+	/* malloc the memory, init to 0 */
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+	p = malloc(nmemb * size);
+	if (p == NULL)
+		return (NULL);
+	for (n = 0; n < nmemb; n++)
+		p[n] = 0;
+	return (p);
+}
 
-	while (s[i])
+/**
+  * mult - multiply the things
+  * @res: int * result is stored in
+  * @n1: string num1
+  * @n2: string num2
+  * @len1: length of num1
+  * @len2: length of num2
+  * Return: void
+  */
+void mult(int *res, char *n1, char *n2, int len1, int len2)
+{
+	/* Declarations */
+	int i, j, f1, f2, sum;
+
+	for (i = len1 - 1; i >= 0; i--)
 	{
-		if (s[i] < 48 || s[i] > 57)
+		sum = 0;
+		f1 = n1[i] - '0';
+		for (j = len2 - 1; j >= 0; j--)
+		{
+			f2 = n2[j] - '0';
+			sum += res[i + j + 1] + (f1 * f2);
+			res[i + j + 1] = sum % 10;
+			sum /= 10;
+		}
+		if (sum > 0)
+			res[i + j + 1] += sum;
+	}
+	/* Take these magic numbers out */
+	for (i = 0; res[i] == 0 && i < len1 + len2; i++)
+	{}
+	if (i == len1 + len2)
+		_putchar('0');
+	for (; i < len1 + len2; i++)
+		_putchar(res[i] + '0');
+	_putchar('\n');
+}
+
+/**
+  * is_valid - is the number a valid one
+  * @num : char string num
+  * Return: int, 1 if true 0 if false
+  */
+int is_valid(char *num)
+{
+	int i;
+	/* input checking */
+	for (i = 0; num[i]; i++)
+	{
+		if (num[i] < '0' || num[i] > '9')
 			return (0);
-		i++;
 	}
 	return (1);
 }
-
 /**
- * _strlen - returns the length of a string
- * @s: string to evaluate
- *
- * Return: the length of the string
- */
-int _strlen(char *s)
+  * err - error function
+  * @status: error code to exit with
+  * Return: void
+  */
+void err(int status)
 {
-	int i = 0;
-
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-/**
- * print - print Error, followed by a new line,
- * and exit with a status of 98
- */
-void print(void)
-{
-	char *str = "Error";
-
-	while (*str != '\0')
-	{
-		_putchar(*str);
-		str++;
-	}
-	exit(98);
-}
-
-/**
- * main - multiplies two positive numbers
- * @argc: number of arguments
- * @argv: array of arguments
- *
- * Return: always 0 (Success)
- */
-int main(int argc, char *argv[])
-{
-	char *num1, *num2;
-	int len1, len2, len, i, carry, digit1, digit2, *mul, a = 0;
-
-	num1 = argv[1], num2 = argv[2];
-	if (argc != 3 || !_isdigit(num1) || !_isdigit(num2))
-		print();
-	len1 = _strlen(num1);
-	len2 = _strlen(num2);
-	len = len1 + len2;
-	mul = malloc(sizeof(int) * len);
-	if (mul == NULL)
-		return (1);
-	for (i = 0; i < len1 + len2; i++)
-		mul[i] = 0;
-	for (len1 = _strlen(num1) - 1; len1 >= 0; len1--)
-	{
-		digit1 = num1[len1] - '0';
-		carry = 0;
-		for (len2 = _strlen(num2) - 1; len2 >= 0; len2--)
-		{
-			digit2 = num2[len2] - '0';
-			carry += mul[len1 + len2 + 1] + (digit1 * digit2);
-			mul[len1 + len2 + 1] = carry % 10;
-			carry /= 10;
-		}
-		if (carry > 0)
-			mul[len1 + len2 + 1] += carry;
-	}
-	for (i = 0; i < len; i++)
-	{
-		if (mul[i])
-			a = 1;
-		if (a)
-			_putchar(mul[i] + '0');
-	}
-	if (!a)
-		_putchar('0');
+	/* Print "Error" and exit 98 */
+	_putchar('E');
+	_putchar('r');
+	_putchar('r');
+	_putchar('o');
+	_putchar('r');
 	_putchar('\n');
-	free(mul);
+	exit(status);
+}
+/**
+  * main - Entry Point
+  * @argc: argument count
+  * @argv: argument string array
+  * Return: 0
+  */
+int main(int argc, char **argv)
+{
+	int i, j, len1 = 0, len2 = 0;
+	int *res;
+
+	/* if there aren't two numbers as arguments */
+	if (argc != 3)
+	{
+		err(98);
+	}
+	for (i = 1; i < argc; i++)
+	{
+		/* if the two numbers are erroneous */
+		if (!(is_valid(argv[i])))
+			err(98);
+		/* find the length of each number */
+		if (i == 1)
+		{
+			for (j = 0; argv[i][j]; j++)
+				len1++;
+		}
+		if (i == 2)
+		{
+			for (j = 0; argv[i][j]; j++)
+				len2++;
+		}
+	}
+	res = int_calloc(len1 + len2, sizeof(int));
+	if (res == NULL)
+		err(98);
+	/* actual multiply call */
+	mult(res, argv[1], argv[2], len1, len2);
+	free(res);
+	/* final return */
 	return (0);
 }
