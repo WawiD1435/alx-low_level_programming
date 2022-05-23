@@ -6,7 +6,7 @@
 #include <string.h>
 
 /**
- * struct listint_s singly listed link
+ * struct listint_s - singly liked list of integers
  * @n: integer
  * @next: next node
  *
